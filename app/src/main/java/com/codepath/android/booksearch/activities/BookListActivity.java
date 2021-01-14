@@ -2,6 +2,7 @@ package com.codepath.android.booksearch.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,6 +24,7 @@ import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.parceler.Parcels;
 
 import java.util.ArrayList;
 
@@ -57,12 +59,18 @@ public class BookListActivity extends AppCompatActivity {
                         Toast.LENGTH_SHORT).show();
 
                 // Handle item click here:
+
                 // Create Intent to start BookDetailActivity
                 Intent bookDetailActivityIntent;
                 bookDetailActivityIntent = new Intent(BookListActivity.this,
                         BookDetailActivity.class);
+
                 // Get Book at the given position
                 // Pass the book into details activity using extras
+                bookDetailActivityIntent.putExtra("position", Parcels.wrap(abooks.get(position)));
+                startActivity(bookDetailActivityIntent);
+
+
             }
         });
 

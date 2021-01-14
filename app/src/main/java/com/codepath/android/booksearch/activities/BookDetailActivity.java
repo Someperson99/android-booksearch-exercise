@@ -2,12 +2,18 @@ package com.codepath.android.booksearch.activities;
 
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.codepath.android.booksearch.R;
+import com.codepath.android.booksearch.models.Book;
+
+import org.parceler.Parcels;
 
 public class BookDetailActivity extends AppCompatActivity {
     private ImageView ivBookCover;
@@ -24,8 +30,15 @@ public class BookDetailActivity extends AppCompatActivity {
         tvAuthor = (TextView) findViewById(R.id.tvAuthor);
 
         // Extract book object from intent extras
+        Book book = (Book) Parcels.unwrap(getIntent().getParcelableExtra("position"));
+        Log.i("BookDetailActivity", book.getTitle());
 
+        tvTitle.setText(book.getTitle());
+        tvAuthor.setText(book.getAuthor());
+        Glide.with(this).load(book.getCoverUrl()).into(ivBookCover);
         // Use book object to populate data into views
+
+
     }
 
 
